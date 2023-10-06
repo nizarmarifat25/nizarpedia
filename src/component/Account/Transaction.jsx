@@ -44,7 +44,7 @@ const Transaction = () => {
                                                 <span className='badge bg-success'>{data.status_transaction}</span>
                                         }
                                         <i className="bi bi-three-dots-vertical fw-bold ms-2" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                        <ul className="dropdown-menu">
+                                        <ul className="dropdown-menu animate slideIn shadow">
                                             <li className="dropdown-item" type='button'> <i className="bi text-primary bi-card-list me-2"></i>Detail </li>
                                             <li className="dropdown-item " type='button'> <i className="bi text-danger bi-file-pdf me-2"></i>Cetak Invoice</li>
                                         </ul>

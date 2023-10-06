@@ -76,7 +76,7 @@ const Navigation = ({ getToken, updated }) => {
                                 <span className='badge badge-warning' id='lblCartCount'> {cart.length}</span>
                             }
                         </span>
-                        <ul className="dropdown-menu dropdown-menu-end shadow p-2" style={{ width: '450px' }}>
+                        <ul className="dropdown-menu dropdown-menu-end shadow p-2 animate slideIn" style={{ width: '450px', border: 'none', marginTop: '18px' }}>
                             {cart.length > 0 ?
                                 <>
                                     {cart.map((item, i) => {
@@ -97,7 +97,6 @@ const Navigation = ({ getToken, updated }) => {
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <hr className='m-0' />
                                                 </>
                                             )
                                         }
@@ -115,7 +114,7 @@ const Navigation = ({ getToken, updated }) => {
                     </div>
                     <div className='dropdown d-lg-block'>
                         <strong className='nav-account align-middle' type="button" data-bs-toggle="dropdown" aria-expanded="false">{cookie.get('name')}</strong>
-                        <ul className="dropdown-menu dropdown-menu-end">
+                        <ul className="dropdown-menu dropdown-menu-end shadow p-2 animate slideIn" style={{ width: '250px', border: 'none', marginTop: '24px' }}>
                             <li className="px-2 py-1" type='button'>
                                 <i className="bi bi-person align-middle fs-5"></i>
                                 <small className='ms-3'>Akun Saya</small>

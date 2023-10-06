@@ -84,6 +84,8 @@ const Navigation = ({ getToken, updated }) => {
                                             return (
                                                 <>
                                                     <li key={i} className="dropdown-item p-2 " type='button'>
+                                                    <Link to={'/cart'}>
+
                                                         <div className='row align-items-center'>
                                                             <div className="col-1">
                                                                 <img src={item.image_url} alt="" width={'40px'} />
@@ -96,6 +98,7 @@ const Navigation = ({ getToken, updated }) => {
                                                                 <strong className='product-detail-price'>Rp. {thousands_separators(item.price)}</strong>
                                                             </div>
                                                         </div>
+                                                        </Link>
                                                     </li>
                                                 </>
                                             )

@@ -16,7 +16,8 @@ const Checkout = () => {
             user_id: Cookies.get('id'),
             product_id: purchased.product_purchased.id,
             quantity: purchased.qty,
-            variant: purchased.variant
+            variant: purchased.variant,
+            stock: purchased.product_purchased.stock
         }
         axios.post(BASE_URL + 'transaction', body, {
             headers: {

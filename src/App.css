@@ -104,11 +104,11 @@ input[type=number] {
   color: #ffff;
   padding: 8px 15px;
   cursor: not-allowed;
-  background-color: var(--secondary);
+  background-color: var(--secondary) !important;
 }
 
 .button-disabled:hover {
-  cursor: not-allowed
+  cursor: not-allowed !important
 }
 
 .button-danger-sm {

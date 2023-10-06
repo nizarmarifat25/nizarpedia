@@ -11,7 +11,7 @@ const ProductById = ({ updated, update }) => {
   let { id } = useParams()
   const [params, setParams] = useState(id)
   const [product, setProduct] = useState()
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
   const [variant, setVariant] = useState("")
   const [price, setPrice] = useState("")
   const [validate, setValidate] = useState(false)
@@ -102,12 +102,6 @@ const ProductById = ({ updated, update }) => {
     getData()
   }, [params])
 
-  const showModal = () => {
-
-  }
-
-
-
   return (
     <div className='container'>
       {!product ? null :
@@ -146,22 +140,37 @@ const ProductById = ({ updated, update }) => {
                   </div>
                 </div>
               }
-              <div className="row">
+              <div className="row align-items-center">
                 <div className="col-3">
                   <span className="label-product">Kuantitas</span>
                 </div>
                 <div className="col">
-                  <button className={qty <= 0 ? "disabled btn-qty" : "btn-qty"} onClick={() => (setQty(qty - 1))} disabled={qty <= 0 ? true : false}>-</button>
-                  <input type="number" className="input-qty" value={qty} onChange={(e) => setQty(e.target.value === "" ? 0 : parseInt(e.target.value))} />
-                  <button className="btn-qty" onClick={() => (setQty(qty + 1))}>+</button>
+                  <button className={qty <= 1 ? "disabled btn-qty" : "btn-qty"} onClick={() => (setQty(qty - 1))} disabled={qty <= 1 ? true : false}>-</button>
+                  <input type="number" className="input-qty" value={qty}
+                    onChange={
+                      (e) =>
+                        e.target.value === "" ? setQty(1) :
+                          parseInt(e.target.value) > product.stock ?
+                            setQty(product.stock) :
+                            setQty(parseInt(e.target.value))
+                    } />
+                  <button className={qty >= product.stock ? "disabled btn-qty me-2" : "btn-qty me-2"} disabled={qty >= product.stock ? true : false} onClick={() => (setQty(qty + 1))}>+</button>
+                  {product.stock >= 50 ?
+                    <span>Sisa Barang :<strong className="text-success"> {product.stock}</strong></span> :
+                    product.stock >= 20 ?
+                      <span>Sisa Barang : <strong className="text-warning">{product.stock}</strong></span> :
+                      product.stock <= 20 ?
+                        <span>Sisa Barang : <strong className="text-warning">{product.stock}</strong></span> :
+                        null
+                  }
                 </div>
               </div>
               <div className="my-3">
-                <button className="button-primary" onClick={(e) => storeToCart(e)}>
+                <button className="button-primary"  onClick={(e) => storeToCart(e)}>
                   <i className="bi bi-cart me-2"></i>
                   Masukan Keranjang
                 </button>
-                <button className="button-secondary mx-2" onClick={(e) => storeToCookie(e)} >Beli Sekarang</button>
+                <button className= "button-secondary mx-2" onClick={(e) => storeToCookie(e)} >Beli Sekarang</button>
               </div>
               <div>
                 {validate &&

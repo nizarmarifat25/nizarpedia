@@ -148,16 +148,37 @@ function Cart() {
   const changeQty = (e, index, idx, action) => {
     if (action === 'change') {
       const list = [...dataCart]
-      list[index].product[idx] = e.target.value === "" ? 1 : parseInt(e.target.value)
+      if (e.target.value === "") {
+        list[index].product[idx].qty = 1
+      } else if (parseInt(e.target.value) > list[index].product[idx].stock) {
+        list[index].product[idx].qty = list[index].product[idx].stock
+      } else {
+        list[index].product[idx].qty = parseInt(e.target.value)
+      }
       setDataCart(list)
+      if (selectedData.length > 0) {
+        var areas = selectedData.map(arr => arr.price * arr.qty);
+        var total = areas.reduce((a, b) => (a + b));
+        setSum(total)
+      }
     } else if (action === 'plus') {
       const list = [...dataCart]
       list[index].product[idx].qty++
       setDataCart(list)
+      if (selectedData.length > 0) {
+        var areas = selectedData.map(arr => arr.price * arr.qty);
+        var total = areas.reduce((a, b) => (a + b));
+        setSum(total)
+      }
     } else {
       const list = [...dataCart]
       list[index].product[idx].qty--
       setDataCart(list)
+      if (selectedData.length > 0) {
+        var areas = selectedData.map(arr => arr.price * arr.qty);
+        var total = areas.reduce((a, b) => (a + b));
+        setSum(total)
+      }
     }
 
   }
@@ -197,7 +218,7 @@ function Cart() {
                       </div>
                       <div className="col-2">
                         <small >{item.product_name}</small> <br />
-                        <strong>Rp {thousands_separators(item.price)}</strong>
+                        <strong>Rp {item.price}</strong>
                       </div>
                       <div className="col-2">
                         {
@@ -208,10 +229,11 @@ function Cart() {
                         <small>Kuantitas : {item.qty}</small>
                       </div>
                       <div className='col'>
+                        <small>Sisa barang : {item.stock}</small>
                         <div>
                           <button className={item.qty <= 1 ? "disabled btn-qty" : "btn-qty"} onClick={(e) => changeQty(e, i, idx, 'min')} disabled={item.qty <= 1 ? true : false}>-</button>
                           <input type="number" className="input-qty" value={item.qty} onChange={(e) => changeQty(e, i, idx, 'change')} />
-                          <button className="btn-qty" onClick={(e) => changeQty(e, i, idx, 'plus')}>+</button>
+                          <button className={item.qty >= item.stock ? "disabled btn-qty btn-qty" : "btn-qty"} onClick={(e) => changeQty(e, i, idx, 'plus')} disabled={item.qty >= item.stock ? true : false}>+</button>
                         </div>
                       </div>
                       <div className="col">

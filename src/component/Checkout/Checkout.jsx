@@ -11,7 +11,7 @@ const Checkout = () => {
     const transaction = (e) => {
         e.preventDefault()
         const body = {
-            sub_total: purchased.price * purchased.qty + 10000,
+            sub_total: purchased.price * purchased.qty ,
             price: purchased.price,
             user_id: Cookies.get('id'),
             product_id: purchased.product_purchased.id,
@@ -75,11 +75,6 @@ const Checkout = () => {
                                 <td colSpan={3}></td>
                                 <td style={{ textAlign: 'right' }}>Subtotal Harga Produk :</td>
                                 <td style={{ textAlign: 'right' }}>Rp {thousands_separators(purchased.price * purchased.qty)}</td>
-                            </tr>
-                            <tr>
-                                <td colSpan={3}></td>
-                                <td style={{ textAlign: 'right' }}>Total Ongkos Kirim :</td>
-                                <td style={{ textAlign: 'right' }}>Rp 10.000</td>
                             </tr>
                             <tr>
                                 <td colSpan={3}></td>

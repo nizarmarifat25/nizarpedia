@@ -9,7 +9,6 @@ function Cart() {
   const [dataCart, setDataCart] = useState([])
   const [selectedData, setselectedData] = useState([])
   const [sum, setSum] = useState(0)
-  const [ongkir, setOngkir] = useState(0)
 
   const getAllCart = () => {
     axios.get(BASE_URL + 'cart/' + Cookies.get('id'), {
@@ -57,7 +56,6 @@ function Cart() {
       });
       var areas = selectedData.map(arr => arr.price * arr.qty);
       var total = areas.reduce((a, b) => (a + b));
-      console.log(total, "total");
       setSum(total);
       setDataCart(list)
     } else {
@@ -80,18 +78,6 @@ function Cart() {
         setSum(0)
       }
     }
-
-    let tempOngkir = []
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].check == true) {
-        tempOngkir.push('')
-      }
-    }
-    let initialOngkir = 0
-    for (let i = 0; i < tempOngkir.length; i++) {
-      initialOngkir += 10000
-    }
-    setOngkir(initialOngkir);
     setDataCart(list)
 
   }
@@ -129,19 +115,6 @@ function Cart() {
         }
       }
     }
-
-    let tempOngkir = []
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].check == true) {
-        tempOngkir.push('')
-      }
-    }
-    let initialOngkir = 0
-    for (let i = 0; i < tempOngkir.length; i++) {
-      initialOngkir += 10000
-    }
-    setOngkir(initialOngkir);
-
     setDataCart(list)
   }
 
@@ -256,19 +229,13 @@ function Cart() {
                 <small>Rp {thousands_separators(sum)}</small>
               </div>
             </div>
-            <div className='row mt-2'>
-              <div className="col">Ongkir</div>
-              <div className="col text-end">
-                <small>Rp {ongkir}</small>
-              </div>
-            </div>
             <hr />
             <div className="row">
               <div className="col">
                 <strong>Total harga</strong>
               </div>
               <div className="col text-end">
-                <strong>Rp {selectedData.length !== 0 ? thousands_separators(sum + ongkir) : 0}</strong>
+                <strong>Rp {selectedData.length !== 0 ? thousands_separators(sum) : 0}</strong>
               </div>
               <button className="button-primary mt-3">Beli</button>
             </div>
